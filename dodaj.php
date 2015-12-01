@@ -26,8 +26,11 @@
 		$czas= htmlentities($czas, ENT_QUOTES, "UTF-8");
 		
 		$id = $_SESSION['id'] ;
-		//$add = "INSERT INTO przepisy (id, nazwa, przepis, userid, kategoriaid, poziomid, czas) VALUES ('', '$nazwa', '$sposob', '$id','$kategoria','$poziom','$czas')";
-		$add = "INSERT INTO `przepisy`.`przepisy` (`id`, `nazwa`, `przepis`, `userid`, `kategoriaid`, `poziomid`, `czas`) VALUES (NULL, '$nazwa', '$sposob', $id, '$kategoria', '$poziom', '$czas')";
+		
+		$polecenie1 = "SELECT id FROM `poziomy` WHERE nazwa='trudny'";
+		$poziom1 = $polecenie1;
+		
+		$add = "INSERT INTO `przepisy`.`przepisy` (`id`, `nazwa`, `przepis`, `userid`, `kategoriaid`, `poziomid`, `czas`) VALUES (NULL, '$nazwa', '$sposob', $id, 13, $poziom1, 30)";
 		
 		
 		if ($polaczenie->query($add))

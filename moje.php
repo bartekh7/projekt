@@ -103,7 +103,7 @@
 					Sposób przygotowania:
 					
 					<br>
-					<textarea name="sposob" cols="73" rows="6"></textarea>	
+					<textarea name="sposob" cols="73" rows="15"></textarea>	
 					<br><br>
 									
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kategoria &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Poziom trudności: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Czas
@@ -130,9 +130,9 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								
 					<select name="poziom">
-						<option value"1">Łatwe</option>
-						<option value"2">Średnie</option>
-						<option value"3">Trudne</option>
+						<option value"1">Łatwy</option>
+						<option value"2">Średni</option>
+						<option value"3">Trudny</option>
 					</select>	
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					

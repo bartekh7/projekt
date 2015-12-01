@@ -23,8 +23,9 @@ $ileprzep = $result->num_rows;
 	while($row = $result->fetch_row()) {
 		echo '<div class="przepisuser">';
 		echo '<p><b>  '.$row[0].' </b></p>';
-		echo '<p>'.$row[1].'<br>
+		echo '<p>'.$row[1].'<br> <br> 
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		
 		<input type="submit" value="Edytuj" style="width:200px;" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="submit" value="Dodaj komentarz" style="width:200px;" /> </p><br>
 		</div>';
