@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 	session_start();
 	
@@ -11,7 +11,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title> Moje przepisy</title>
+	<title> Kategorie </title>
 	<meta name="description" content "Lista najwspanialszych przepisów kulinarnych ever :D" />
 	<meta name="keywords" content "przepisy kulinarne, najlepsze potrawy, przepisy"  />
 	<meta http-equiv="X-UA-Compatible" content="IE-edge, chrome=1" />
@@ -45,11 +45,7 @@
 			<i class="icon-twitter"></i>
 		</a>
 		</div>
-		<div class="wisielec">
-		<a href="gra/szubienicamenu.html" class="medialinki" target="_blank" title="Wisielec - zagraj w grę">
-			<b>W</b>
-		</a>
-		</div>	
+			
 		<div id="login">
 		
 			<?php include('inc/menu2.php'); ?>
@@ -65,7 +61,7 @@
 		</div>
 		
 		<div id="searchfield">
-		<form action="mojeniezal.php" method="post">
+		<form action="szukaj.php" method="post">
 			<input type="text" name="pole" size=70 placeholder="Wpisz szukany przepis" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			
 			<input type="submit" value="Szukaj" style="width:150px;" />
@@ -82,25 +78,52 @@
 			
 			<div id="catmenu">
 			
-		<?php include('inc/menuKategorie.php'); ?>
+			<?php include('inc/menuKategorie.php'); ?>
 				
 			</div>
 		</div>
 		
-		 <div class="rightbar2">
-				
-				<div id="recipe">
-				
-					<?php include('szukaj.php'); ?>
-				
-				</div>
-				
-				
-				
-				<br>
+		<div class="rightbar2">
+			<?php
+			$id = addslashes($_GET['id']);
 			
+			require_once "connect.php";
+
+			$polaczenie = @new  mysqli($host, $dbuser, $dbpass, $dbname);
+			$polaczenie->set_charset("utf8");
+			$userid = $_SESSION['id'] ;
+
+			$sql = "SELECT nazwa, przepis, id FROM  przepisy WHERE  id='$id'  LIMIT 1";
+			
+			$result = $polaczenie->query($sql);
+		
+			
+			while($row = $result->fetch_row()) 
+			{
+				echo "<h1>$row[0]</h1>";
+				echo "<p>$row[1]<p>";
+			
+			
+			?>
+			<div id="komentarz">
+		<form method="post" action="dodajkomentarz.php">
+			<input type="hidden" name="id" value="<?php echo $row[2]; ?>"/>
+			<input type="hidden" name="user" value="<?php echo $_SESSION['id'] ; ?>"/>
+			<textarea name="komentarz" placeholder="Wpisz treść komentarza..." style="width:716px;" cols="73" rows="10"></textarea>
+			<input type="submit" value="Dodaj komentarz"/>
+		</form>
+		</div>
 		</div>
 		
+		
+			<?php
+			}
+			
+			
+			?>
+		
+			
+			
 		<div style="clear:both"></div>	
 				
 		<div id="stopka">

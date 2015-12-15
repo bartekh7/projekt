@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 	session_start();
 	
@@ -11,7 +11,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title> Moje przepisy</title>
+	<title> Kategorie </title>
 	<meta name="description" content "Lista najwspanialszych przepisów kulinarnych ever :D" />
 	<meta name="keywords" content "przepisy kulinarne, najlepsze potrawy, przepisy"  />
 	<meta http-equiv="X-UA-Compatible" content="IE-edge, chrome=1" />
@@ -20,7 +20,6 @@
 	<link rel="stylesheet" href="css/fontello.css" type="text/css" />
 	
 	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	
 	
 </head>
@@ -46,13 +45,7 @@
 			<i class="icon-twitter"></i>
 		</a>
 		</div>
-		
-		<div class="wisielec">
-		<a href="gra/szubienicamenu.html" class="medialinki" target="_blank" title="Wisielec - zagraj w grę">
-			<b>W</b>
-		</a>
-		</div>
-		
+			
 		<div id="login">
 		
 			<?php include('inc/menu2.php'); ?>
@@ -69,7 +62,7 @@
 		
 		<div id="searchfield">
 		<form action="mojeniezal.php" method="post">
-			<input type="text" name="pole"size=70 placeholder="Wpisz szukany przepis" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="text" name="pole" size=70 placeholder="Wpisz szukany przepis" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			
 			<input type="submit" value="Szukaj" style="width:150px;" />
 			</form>
@@ -85,35 +78,41 @@
 			
 			<div id="catmenu">
 			
-		<?php include('inc/menuKategorie.php'); ?>
+			<?php include('inc/menuKategorie.php'); ?>
 				
 			</div>
 		</div>
 		
-		 <div class="rightbar2">
-				
-				<div id="recipe">
-				
-					<?php include('inc/moje_szukaj.php'); ?>
-				
-				</div>
-				
-				<div id="addrecipe">
-				
-				<form action="dodaj.php" method="post">
+		<div class="rightbar2">
+			<?php
+			$id = addslashes($_GET['id']);
+			
+			require_once "connect.php";
+
+			$polaczenie = @new  mysqli($host, $dbuser, $dbpass, $dbname);
+			$polaczenie->set_charset("utf8");
+			$userid = $_SESSION['id'] ;
+
+			$sql = "SELECT nazwa, przepis FROM  przepisy WHERE userid='$userid' AND id='$id'  LIMIT 1";
+
+			$result = $polaczenie->query($sql);
+			while($row = $result->fetch_row()) 
+			{
+			?>
+			<form action="edytuj.php" method="post">
 				
 					Nazwa: 
 					<br> 
-					<input type="text" name="nazwa" style="width:600px;" required />
+					<input type="text" name="nazwa" style="width:600px;" value = "<?php  echo $row[0] ?>" required />
 					<br><br>
 									
 					Sposób przygotowania:
 					
 					<br>
-					<textarea name="sposob" cols="73" rows="15"></textarea>	
+					<textarea name="sposob" cols="73" rows="15"><?php  echo $row[1] ?></textarea>	
 					<br><br>
 									
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kategoria &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Poziom trudności: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Czas[w min]:
+					&nbsp;&nbsp;&nbsp;&nbsp; Kategoria &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Poziom trudności: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Czas[w min]:
 					
 					<br>
 					&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -141,7 +140,7 @@
 						<option value"2">Średni</option>
 						<option value"3">Trudny</option>
 					</select>	
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					
 					<select name="czas">
 						<option value"15">15</option>
@@ -158,12 +157,15 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="submit" value="Dodaj przepis" style="width:140px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="submit" value="Edytuj przepis" style="width:140px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					
 				
 				</form>
-				
-				<br>
+			<?php
+			}
+			
+			?>
+
 			
 		</div>
 		

@@ -61,8 +61,8 @@
 		</div>
 		
 		<div id="searchfield">
-		<form action="szukaj.php" method="post">
-			<input type="text" name="searchin" size=70 placeholder="Wpisz szukany przepis" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<form action="mojeniezal.php" method="post">
+			<input type="text" name="pole" size=70 placeholder="Wpisz szukany przepis" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			
 			<input type="submit" value="Szukaj" style="width:150px;" />
 			</form>
@@ -92,7 +92,42 @@
 			}
 			else
 			{
-			//tu includuj kategorie
+			require_once "connect.php";
+
+$polaczenie = @new  mysqli($host, $dbuser, $dbpass, $dbname);
+$polaczenie->set_charset("utf8");
+$id = $_GET['kategoria'];
+
+$sql = "SELECT nazwa, przepis, id FROM  przepisy WHERE kategoriaid='$id' ORDER BY  nazwa ASC";
+
+$result = $polaczenie->query($sql);
+
+$ileprzep = $result->num_rows;
+			if($ileprzep==0)
+			{				
+				echo '<div class="przepisuser">
+				<br>
+						<p> <b> Nie ma przepisów w danej kategorii! </b> </p>
+						</div>
+						';
+			}
+
+	while($row = $result->fetch_row()) 
+	{
+		echo '<div class="przepisuser">';
+		echo '<p><b>  '.$row[0].' </b></p>';
+		echo '<p>'.$row[1].'<br> <br> 
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		
+		<a href="przepis.php?id='.$row[2].'">Szczegóły</a></p><br>
+		</div>';
+		
+	}
 			}	?>
 			
 		</div>

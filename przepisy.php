@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="css/fontello.css" type="text/css" />
 	
 	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	
 	
 </head>
@@ -49,6 +50,11 @@
 			<i class="icon-twitter"></i>
 		</a>
 		</div>
+		<div class="wisielec">
+		<a href="gra/szubienicamenu.html" class="medialinki" target="_blank" title="Wisielec - zagraj w grę">
+			<b>W</b>
+		</a>
+		</div>
 			
 		<div id="login">
 		
@@ -68,8 +74,8 @@
 		</div>
 		
 		<div id="searchfield">
-		<form action="szukaj.php" method="post">
-			<input type="text" name="searchin" size=70 placeholder="Wpisz szukany przepis" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<form action="mojeniezal.php" method="post">
+			<input type="text" name="pole" size=70 placeholder="Wpisz szukany przepis" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			
 			<input type="submit" value="Szukaj" style="width:150px;" />
 			</form>

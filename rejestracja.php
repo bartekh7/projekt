@@ -60,7 +60,7 @@
 		</div>
 		
 		<div id="searchfield">
-		<form action="szukaj.php" method="post">
+		<form action="mojeniezal.php" method="post">
 			<input type="text" name="searchin" size=70 placeholder="Wpisz szukany przepis" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			
 			<input type="submit" value="Szukaj" style="width:150px;" />

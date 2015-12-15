@@ -4,9 +4,6 @@ require_once "connect.php";
 
 $polaczenie = @new  mysqli($host, $dbuser, $dbpass, $dbname);
 
-//$sql = "INSERT INTO `przepisy`.`kategorie` (`id`, `nazwa`, `obrazek`) VALUES (NULL, 'Potrawy mięsne', 'pzmies.png');";
-//$result = $polaczenie->query($sql);
-
 $sql = "SELECT * FROM  kategorie ORDER BY  nazwa ASC";
 
 $result = $polaczenie->query($sql);

@@ -1,7 +1,7 @@
 ﻿<?php
 
 	session_start();
-
+	
 	require_once "connect.php";
 
 	$polaczenie = @new  mysqli($host, $dbuser, $dbpass, $dbname);
@@ -13,6 +13,7 @@
 	}
 	else
 	{
+		$id = $_POST['id'];
 		$nazwa = $_POST['nazwa'];
 		$sposob = ($_POST['sposob']);
 		$kategoria = $_POST['kategoria'];
@@ -24,26 +25,20 @@
 		$kategoria= htmlentities($kategoria, ENT_QUOTES, "UTF-8");
 		$poziom= htmlentities($poziom, ENT_QUOTES, "UTF-8");
 		$czas= htmlentities($czas, ENT_QUOTES, "UTF-8");
-		
-		$id = $_SESSION['id'] ;
-		
-		
+				
 		$polecenie1 = "SELECT id FROM `poziomy` WHERE nazwa='$poziom'";
 		$polecenie2 = "SELECT id FROM `kategorie` WHERE nazwa='$kategoria'";
 		
+		$update  = "UPDATE `przepisy`.`przepisy` SET `nazwa` = '$nazwa', `przepis` = '$sposob', `kategoriaid` = ('$polecenie2'), `poziomid` = ('$polecenie1'), `czas` = '$czas' WHERE `przepisy`.`id` = $id";
 		
-		$add = "INSERT INTO `przepisy`.`przepisy` (`id`, `nazwa`, `przepis`, `userid`, `kategoriaid`, `poziomid`, `czas`) VALUES (NULL, '$nazwa', '$sposob', $id, ($polecenie2),  ($polecenie1) , '$czas')";
-		
-		
-		if ($polaczenie->query($add))
+		if ($polaczenie->query($update))
 				{
-					$_SESSION['dodano'] = '<span style="color:black"> Dodałeś nowy przepis! </span>';
-					header('Location:moje.php');		
+					header('Location:przepisy_szukaj.php');		
 				} 
 				else 
 				{
-					echo "Error: " . $add . "<br>" . $polaczenie->error;
+					echo "Error: " . $update . "<br>" . $polaczenie->error;
 				}
 		$polaczenie->close();
 	}
-	
+	?>

@@ -1,12 +1,12 @@
-<?php
+﻿<?php
 
 require_once "connect.php";
 
 $polaczenie = @new  mysqli($host, $dbuser, $dbpass, $dbname);
-
+$polaczenie->set_charset("utf8");
 $id = $_SESSION['id'] ;
 
-$sql = "SELECT nazwa, przepis FROM  przepisy WHERE userid='$id' ORDER BY  nazwa ASC";
+$sql = "SELECT nazwa, przepis, id FROM  przepisy WHERE userid='$id' ORDER BY  nazwa ASC";
 
 $result = $polaczenie->query($sql);
 
@@ -20,16 +20,20 @@ $ileprzep = $result->num_rows;
 						';
 			}
 
-	while($row = $result->fetch_row()) {
+	while($row = $result->fetch_row()) 
+	{
 		echo '<div class="przepisuser">';
 		echo '<p><b>  '.$row[0].' </b></p>';
 		echo '<p>'.$row[1].'<br> <br> 
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		
-		<input type="submit" value="Edytuj" style="width:200px;" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input type="submit" value="Dodaj komentarz" style="width:200px;" /> </p><br>
+		<a href="przepisy_szukaj.php?id='.$row[2].' style="text-decoration:none;" ">Edytuj</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="przepis.php?id='.$row[2].'">Szczegóły</a></p><br>
 		</div>';
 		
-	
-}
+	}
 ?>
